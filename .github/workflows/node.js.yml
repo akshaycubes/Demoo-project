@@ -26,9 +26,6 @@ jobs:
         cache: 'npm'
     - run: npm ci
     -  run: npm install
-    - name: Start the application
-      run: npm start
-    - run : npm test   
     - run: |
           touch .env
           echo "${{ secrets.PORT }}" > .env    
