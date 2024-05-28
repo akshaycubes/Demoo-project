@@ -2,49 +2,48 @@ const express = require("express");
 const app = express();
 // const bodyParser = require('body-parser');
 // // Middleware for parsing JSON requests
- app.use(bodyParser.json()); 
+ //app.use(bodyParser.json()); 
  require("dotenv").config()
+ const bcrypt = require("bcrypt");
 
-// app.get('/api/get',(req,res) => {
-//     res.send({message:"hello Hardik Welcome to nodejs project "})
-// })
+ const password = "12345678";
+ const hashedPassword = bcrypt.hash(password, 10);
 
-// app.get('/api/get_user_details',(req,res) => {
-//     res.send({
-//         user:{
-//             name:"hardik",
-//             lastname: "Pansani",
-//             contact:12254
-//         },env :process.env.NAME
-//     })
-// });
 
-// // Dummy data
-// let users = [
-//     { id: 1, name: 'John Doe', email: 'john@example.com' },
-//     { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-//     { id: 3, name: 'John Doe', email: 'john@example.com' },
-//     { id: 4, name: 'John Doe', email: 'john@example.com' },
-//     { id: 5, name: 'John Doe', email: 'john@example.com' },
-//     { id: 6, name: 'John Doe', email: 'john@example.com' },
-//     { id: 7, name: 'John Doe', email: 'john@example.com' },
-//     { id: 8, name: 'John Doe', email: 'john@example.com' },
-//     { id: 9, name: 'John Doe', email: 'john@example.com' },
-//     { id: 10, name: 'John Doe', email: 'john@example.com' },
-//     { id: 11, name: 'John Doe', email: 'john@example.com' },
-//     { id: 11, name: 'be', email: 'be@example.com' },
-//     { id: 11, name: 'be2', email: 'be@example.com' },
-//     { id: 11, name: 'kirtan', email: 'kirtan@example.com' },
-//     { id: 12, name: 'biren', email: 'biren@example.com' },
-//     { id: 12, name: 'xxxx', email: 'biren@example.com' },
-// ];
+// Dummy data
+let users = [
+    { id: 1, name: 'John Doe', email: 'john@example.com' },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
+    { id: 3, name: 'John Doe', email: 'john@example.com' },
+    { id: 4, name: 'John Doe', email: 'john@example.com' },
+    { id: 5, name: 'John Doe', email: 'john@example.com' },
+    { id: 6, name: 'John Doe', email: 'john@example.com' },
+    { id: 7, name: 'John Doe', email: 'john@example.com' },
+    { id: 8, name: 'John Doe', email: 'john@example.com' },
+    { id: 9, name: 'John Doe', email: 'john@example.com' },
+    { id: 10, name: 'John Doe', email: 'john@example.com' },
+    { id: 11, name: 'John Doe', email: 'john@example.com' },
+    { id: 11, name: 'be', email: 'be@example.com' },
+    { id: 11, name: 'be2', email: 'be@example.com' },
+    { id: 11, name: 'kirtan', email: 'kirtan@example.com' },
+    { id: 12, name: 'biren', email: 'biren@example.com' },
+    { id: 12, name: 'xxxx', email: 'biren@example.com' },
+];
 
 // // Routes
-// // Get all users
-// app.get('/api/users', (req, res) => {
-//     res.json(users);
-// });
+// Get all users
+app.get('/api/users', (req, res) => {
+    res.json(hashedPassword);
+});
+app.get('/api/hash', async (req, res) => {
 
+    try {
+        const hashedPassword = await bcrypt.hash("12345678", 10);
+        res.json({ hashedPassword });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 // // Get a specific user by ID
 // app.get('/api/users/:id', (req, res) => {
 //     const userId = parseInt(req.params.id);
@@ -86,20 +85,7 @@ const app = express();
 //     res.status(204).end();
 // });
 
-const bcrypt = require('bcrypt');
 
-const saltRounds = 10;
-const myPlaintextPassword = 's1mpl3';
-
-bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
-  // Store hash in your password DB.
-});
-
-// Later, when a user logs in:
-
-bcrypt.compare(myPlaintextPassword, hash, function(err, result) {
-  // result is a boolean indicating whether the passwords match
-});
 
 app.listen(process.env.PORT,() => {
     console.log("listening to 8000");
