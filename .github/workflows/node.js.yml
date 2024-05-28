@@ -27,7 +27,6 @@ jobs:
     - run: npm ci
     - run: |
           touch .env
-          echo "${{ secrets.prod }}" > .env
-    - uses: npm install nodemon bcrypt      
+          echo "${{ secrets.prod }}" > .env    
     - run: pm2 restart Backend
    
