@@ -1,11 +1,10 @@
 const express = require("express");
 const app = express();
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 // // Middleware for parsing JSON requests
- //app.use(bodyParser.json()); 
+ app.use(bodyParser.json()); 
  require("dotenv").config()
  const bcrypt = require("bcrypt");
-
  const password = "12345678";
  const hashedPassword = bcrypt.hash(password, 10);
 
@@ -33,9 +32,9 @@ let users = [
 // // Routes
 // Get all users
 app.get('/api/users', (req, res) => {
-    res.json(hashedPassword);
+    res.json(users);
 });
-app.get('/api/hash', async (req, res) => {
+ app.get('/api/hash', async (req, res) => {
 
     try {
         const hashedPassword = await bcrypt.hash("12345678", 10);
@@ -44,46 +43,46 @@ app.get('/api/hash', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-// // Get a specific user by ID
-// app.get('/api/users/:id', (req, res) => {
-//     const userId = parseInt(req.params.id);
-//     const user = users.find(user => user.id === userId);
+// Get a specific user by ID
+app.get('/api/users/:id', (req, res) => {
+    const userId = parseInt(req.params.id);
+    const user = users.find(user => user.id === userId);
 
-//     if (!user) {
-//         res.status(404).json({ message: 'User not found' });
-//     } else {
-//         res.json(user);
-//     }
-// });
+    if (!user) {
+        res.status(404).json({ message: 'User not found' });
+    } else {
+        res.json(user);
+    }
+});
 
-// // Add a new user
-// app.post('/api/users', (req, res) => {
-//     const newUser = req.body;
-//     users.push(newUser);
-//     res.status(201).json(newUser);
-// });
+// Add a new user
+app.post('/api/users', (req, res) => {
+    const newUser = req.body;
+    users.push(newUser);
+    res.status(201).json(newUser);
+});
 
-// // Update an existing user
-// app.put('/api/users/:id', (req, res) => {
-//     const userId = parseInt(req.params.id);
-//     const updatedUser = req.body;
+// Update an existing user
+app.put('/api/users/:id', (req, res) => {
+    const userId = parseInt(req.params.id);
+    const updatedUser = req.body;
 
-//     users = users.map(user => {
-//         if (user.id === userId) {
-//             return { ...user, ...updatedUser };
-//         }
-//         return user;
-//     });
+    users = users.map(user => {
+        if (user.id === userId) {
+            return { ...user, ...updatedUser };
+        }
+        return user;
+    });
 
-//     res.json(updatedUser);
-// });
+    res.json(updatedUser);
+});
 
-// // Delete a user
-// app.delete('/api/users/:id', (req, res) => {
-//     const userId = parseInt(req.params.id);
-//     users = users.filter(user => user.id !== userId);
-//     res.status(204).end();
-// });
+// Delete a user
+app.delete('/api/users/:id', (req, res) => {
+    const userId = parseInt(req.params.id);
+    users = users.filter(user => user.id !== userId);
+    res.status(204).end();
+});
 
 
 
