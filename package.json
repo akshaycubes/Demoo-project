@@ -68,16 +68,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hardik3116/hardik3116-aws-Node_js-main.git"
-  },
   "author": "hardik pansani",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hardik3116/hardik3116-aws-Node_js-main/issues"
-  },
-  "homepage": "https://github.com/hardik3116/hardik3116-aws-Node_js-main#readme",
+  "bugs":"",
+  "homepage": "",
   "devDependencies": {
     "nodemon": "^3.1.1"
   }
