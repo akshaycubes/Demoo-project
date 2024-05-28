@@ -28,8 +28,8 @@ jobs:
     - run: npm install
     - run: npm run build
     - run: npm test
-    - name: Run Nodemon
-      run: npm run start: server.js
+    - run : 
+       npm run start:dev
     - run: |
           touch .env
           echo "${{ secrets.PORT }}" > .env    
