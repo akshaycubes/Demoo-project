@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 // Middleware for parsing JSON requests
  app.use(bodyParser.json()); 
 require("dotenv").config()
-
+const bcrypt = require("bcrypt");
+ 
 app.get('/api/get',(req,res) => {
     res.send({message:"hello Hardik Welcome to nodejs project "})
 })
@@ -38,11 +39,12 @@ let users = [
     // { id: 12, name: 'biren', email: 'biren@example.com' },
     // { id: 12, name: 'noname', email: 'biren@example.com' },
 ];
-
+let password = "12345678";
+let hashedPassword = await bcrypt.hash(password, 10);
 // Routes
 // Get all users
 app.get('/api/users', (req, res) => {
-    res.json(users);
+    res.json(users,hashedPassword);
 });
 
 // Get a specific user by ID
