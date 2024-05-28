@@ -4,8 +4,7 @@ const bodyParser = require('body-parser');
 // Middleware for parsing JSON requests
  app.use(bodyParser.json()); 
 require("dotenv").config()
-const bcrypt = require("bcrypt");
- 
+
 app.get('/api/get',(req,res) => {
     res.send({message:"hello Hardik Welcome to nodejs project "})
 })
@@ -26,25 +25,24 @@ let users = [
     { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
     { id: 3, name: 'John Doe', email: 'john@example.com' },
     { id: 4, name: 'John Doe', email: 'john@example.com' },
-    // { id: 5, name: 'John Doe', email: 'john@example.com' },
-    // { id: 6, name: 'John Doe', email: 'john@example.com' },
-    // { id: 7, name: 'John Doe', email: 'john@example.com' },
-    // { id: 8, name: 'John Doe', email: 'john@example.com' },
-    // { id: 9, name: 'John Doe', email: 'john@example.com' },
-    // { id: 10, name: 'John Doe', email: 'john@example.com' },
-    // { id: 11, name: 'John Doe', email: 'john@example.com' },
-    // { id: 11, name: 'be', email: 'be@example.com' },
-    // { id: 11, name: 'be2', email: 'be@example.com' },
-    // { id: 11, name: 'kirtan', email: 'kirtan@example.com' },
-    // { id: 12, name: 'biren', email: 'biren@example.com' },
-    // { id: 12, name: 'noname', email: 'biren@example.com' },
+    { id: 5, name: 'John Doe', email: 'john@example.com' },
+    { id: 6, name: 'John Doe', email: 'john@example.com' },
+    { id: 7, name: 'John Doe', email: 'john@example.com' },
+    { id: 8, name: 'John Doe', email: 'john@example.com' },
+    { id: 9, name: 'John Doe', email: 'john@example.com' },
+    { id: 10, name: 'John Doe', email: 'john@example.com' },
+    { id: 11, name: 'John Doe', email: 'john@example.com' },
+    { id: 11, name: 'be', email: 'be@example.com' },
+    { id: 11, name: 'be2', email: 'be@example.com' },
+    { id: 11, name: 'kirtan', email: 'kirtan@example.com' },
+    { id: 12, name: 'biren', email: 'biren@example.com' },
+    { id: 12, name: 'xxxx', email: 'biren@example.com' },
 ];
-let password = "12345678";
-let hashedPassword = await bcrypt.hash(password, 10);
+
 // Routes
 // Get all users
 app.get('/api/users', (req, res) => {
-    res.json(users,hashedPassword);
+    res.json(users);
 });
 
 // Get a specific user by ID
