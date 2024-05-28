@@ -29,8 +29,7 @@ jobs:
     - name: Start the application
       run: npm start
     - run : npm test   
-    - run: |s
+    - run: |
           touch .env
-          echo "${{ secrets.prod }}" > .env    
+          echo "${{ secrets.PORT }}" > .env    
     - run: pm2 restart Backend
-   
